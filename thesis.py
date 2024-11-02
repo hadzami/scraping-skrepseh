@@ -22,10 +22,10 @@ headers = {
   'sec-ch-ua-mobile': '?0',
   'sec-ch-ua-platform': '"macOS"'
 }
+# schema.generate_csv(api_response['data'], "irfan.csv")
 
-response = requests.request("POST", url, headers=headers, data=payload)
-response_json = response.json()
-
-api_response: schema.ApiResponse = cast(schema.ApiResponse, response_json)
-
-schema.generate_csv(api_response['data'], "irfan.csv")
+if __name__ == "__main__":
+    response = requests.request("POST", url, headers=headers, data=payload)
+    response_json = response.json()
+    api_response: schema.ApiResponse = cast(schema.ApiResponse, response_json)
+    schema.generate_csv(api_response['data'], "irfan.csv")

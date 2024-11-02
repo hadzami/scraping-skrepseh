@@ -52,20 +52,36 @@ class ApiResponse(TypedDict):
     draw: str
     recordsFiltered: int
     recordsTotal: int
-    data: List[List[object]]  # Adjust based on the specific nested structure
+    data: List[List[PenData]]  # Adjust based on the specific nested structure
 
-def generate_csv(data: List[PenData], filename: str) -> None:
-    """Generate a CSV file from a list of PenData dictionaries."""
-    if not data or not isinstance(data[0], dict):
-        print("Invalid data format: expected a list of dictionaries.")
-        return
-
-    # Get the headers from the first dictionary
-    headers = data[0].keys()
+def generate_csv(data: List[List[PenData]], filename: str) -> None:
+    # Define field names explicitly
+    fieldnames = [
+        'penId', 'penNoDDC', 'penEntriUtama', 'penJudul',
+        'penDeskripsiFisik', 'penCatatanUmum', 'penKataKunci',
+        'penEntriTambahan', 'penBhsId', 'penJnspenId',
+        'penKota', 'penTahun', 'penPenerbit', 'penAbstraksi',
+        'penAbstract', 'tglEdit', 'userEdit', 'penTerimaId',
+        'penDigitasiId', 'penIjinPublikasiId', 'penPathCover',
+        'penCatatanBibliografi', 'penEntriTambahanKonprensi',
+        'penEntriTambahanOrang', 'penHalPendahuluan', 'penProdi',
+        'penProdiMigrasi', 'penAllowFulltext', 'penTglTambah',
+        'penUserIdTambah', 'penTglUbah', 'penUserIdUbah',
+        'penNoKlasifikasi', 'penTglTambah_etd2017',
+        'penUserIdTambah_etd2017', 'penTglUbah_etd2017',
+        'penUserIdUbah_etd2017', 'pbtId', 'pbtName', 'pbtKota',
+        'jnspenId', 'jnspenJenisPenelitian', 'prodiId',
+        'prodiFakKode', 'prodiNama'
+    ]
 
     with open(filename, mode="w", newline="", encoding="utf-8") as file:
-        writer = csv.DictWriter(file, fieldnames=headers)
-        writer.writeheader()  
-        writer.writerows(data)  
+        writer = csv.DictWriter(file, fieldnames=fieldnames)
+        writer.writeheader()
+        
+        for item in data:
+            if isinstance(item[1], dict):  # Ensure item is a dictionary
+                writer.writerow(item[1])
+            else:
+                print("Item is not a dictionary:", item)
 
     print(f"CSV file '{filename}' generated successfully.")
