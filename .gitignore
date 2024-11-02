@@ -1,0 +1,62 @@
+# Byte-compiled files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Virtual environment
+env/
+venv/
+ENV/
+.venv/
+env.bak/
+.venv.bak/
+
+# Jupyter Notebook checkpoints
+.ipynb_checkpoints
+
+# Config and secret files
+*.env
+config.json
+
+# Distribution files
+dist/
+build/
+*.egg-info/
+
+# Logs
+*.log
+*.out
+*.err
+
+# OS-specific files
+.DS_Store
+Thumbs.db
+
+# IDE-specific files
+.vscode/
+.idea/
+
+# Test coverage and reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+*.cover
+*.py,cover
+coverage.xml
+*.log
+
+# Temporary files
+*.tmp
+*.temp
+*.swp
+
+# MyPy cache (type-checking cache)
+.mypy_cache/
+
+# Pytest cache
+.pytest_cache/
+
+# Scrapbooks or schema-related files if specific
+*.schema
+scraping/__pycache__/
